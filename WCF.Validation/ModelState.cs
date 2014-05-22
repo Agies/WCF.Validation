@@ -1,12 +1,23 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.ServiceModel;
 
 namespace WCF.Validation
 {
     public class ModelState : IExtension<OperationContext>
     {
+        public bool IsValid
+        {
+            get { return !Errors.Any(); }
+        }
+
+        public void AddModelError(string member, string message)
+        {
+            Errors.Add(new ValidationResult(message, new[] {member}));
+        }
+
         public ICollection<ValidationResult> Errors { get; private set; }
 
         public static ModelState Current 

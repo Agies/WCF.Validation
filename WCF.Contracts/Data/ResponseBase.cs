@@ -12,7 +12,9 @@ namespace WCF.Validation
             RequestId = requestBase.MessageId;
         }
 
+        [DataMember]
         public Guid RequestId { get; set; }
+
         public ResponseBase()
         {
             Errors = new List<ValidationError>();

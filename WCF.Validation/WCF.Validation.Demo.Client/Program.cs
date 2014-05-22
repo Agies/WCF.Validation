@@ -22,7 +22,7 @@ namespace WCF.Validation.Demo.Client
                 Console.WriteLine("Request {0} contains the following errors\n", result.RequestId);
                 foreach (var validationError in result.Errors)
                 {
-                    Console.WriteLine("\t Member {0} is mad because {1}", validationError.MemberName, validationError.Message);
+                    Console.WriteLine("\t Member '{0}' is mad because {1}", validationError.MemberName, validationError.Message);
                 }
             }
             catch (Exception e)
