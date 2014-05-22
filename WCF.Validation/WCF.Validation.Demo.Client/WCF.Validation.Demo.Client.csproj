@@ -33,6 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
@@ -49,9 +50,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\WCF.Contracts\WCF.Contracts.csproj">
-      <Project>{4f5661e0-3d93-4139-962a-0d522d8a36fb}</Project>
-      <Name>WCF.Contracts</Name>
+    <ProjectReference Include="..\..\WCF.Contract\WCF.Contract.csproj">
+      <Project>{8E47808F-538A-43C7-B78D-5C396B702EBA}</Project>
+      <Name>WCF.Contract</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

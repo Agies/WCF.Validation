@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.ServiceModel;
 using System.ServiceModel.Dispatcher;
 
@@ -14,7 +15,16 @@ namespace WCF.Validation
             //Assuming that we are using Request/Response objects
             foreach (var input in inputs)
             {
-                Validator.TryValidateObject(input, new ValidationContext(input), ModelState.Current.Errors);
+                var context = new ValidationContext(input);
+                Validator.TryValidateObject(input, context, ModelState.Current.Errors, true);
+                var validatable = input as IValidatableObject;
+                if (validatable != null)
+                {
+                    foreach (var error in validatable.Validate(context))
+                    {
+                        ModelState.Current.Errors.Add(error);
+                    }
+                }
             }
             return null;
         }
@@ -24,11 +34,28 @@ namespace WCF.Validation
             var result = returnValue as ResponseBase;
             if (result != null)
             {
-                result.Errors.AddRange(ModelState.Current.Errors.SelectMany(t => t.MemberNames.Select(m => new ValidationError
+                foreach (var validationResult in ModelState.Current.Errors)
                 {
-                    MemberName = m,
-                    Message = t.ErrorMessage,
-                })));
+                    if (validationResult.MemberNames.Any())
+                    {
+                        foreach (var memberName in validationResult.MemberNames)
+                        {
+                            result.Errors.Add(new ValidationError
+                            {
+                                MemberName = memberName,
+                                Message = validationResult.ErrorMessage,
+                            });
+                        }
+                    }
+                    else
+                    {
+                        result.Errors.Add(new ValidationError
+                        {
+                            MemberName = "",
+                            Message = validationResult.ErrorMessage,
+                        });
+                    }
+                }
             }
         }
     }
