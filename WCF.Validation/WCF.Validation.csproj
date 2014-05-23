@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnnotationAndValidatableRequestValidator.cs" />
+    <Compile Include="AnnotationRequestValidator.cs" />
+    <Compile Include="IRequestValidator.cs" />
     <Compile Include="ModelState.cs" />
     <Compile Include="ParameterValidationInspector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

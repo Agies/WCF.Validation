@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Dispatcher;
 
@@ -40,40 +39,6 @@ namespace WCF.Validation
                     result.AddValidationError("", validationResult.ErrorMessage);
                 }
                     
-            }
-        }
-    }
-
-    public interface IRequestValidator
-    {
-        void Validate(object[] inputs);
-    }
-
-    public class AnnotationRequestValidator : IRequestValidator
-    {
-        public void Validate(object[] inputs)
-        {
-            foreach (var input in inputs)
-            {
-                Validator.TryValidateObject(input, new ValidationContext(input), ModelState.Current.Errors);
-            }
-        }
-    }
-
-    public class AnnotationAndValidatableRequestValidator : IRequestValidator
-    {
-        public void Validate(object[] inputs)
-        {
-            foreach (var input in inputs)
-            {
-                var context = new ValidationContext(input);
-                Validator.TryValidateObject(input, context, ModelState.Current.Errors);
-                var validatable = input as IValidatableObject;
-                if (validatable == null) continue;
-                foreach (var error in validatable.Validate(context))
-                {
-                    ModelState.Current.Errors.Add(error);
-                }
             }
         }
     }
