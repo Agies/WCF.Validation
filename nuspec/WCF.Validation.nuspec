@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>WCF.Validation</id>
+        <version>1.0.1</version>
+        <title>WCF Validation</title>
+        <authors>Jerel R Hass</authors>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>A simple WCF validation library that uses DataAnnotations to validate incomming Request models and pushes the errors into the out going Response Model.</description>
+        <tags>WCF Validation DataAnnotation ComponetModel</tags>
+    </metadata>
+    <files>
+        <file src="lib\net45\WCF.Validation.Contracts.dll" target="lib\net45\WCF.Validation.Contracts.dll" />
+        <file src="lib\net45\WCF.Validation.dll" target="lib\net45\WCF.Validation.dll" />
+        <file src="lib\portable-net4+sl4+wp7+win8\WCF.Validation.Contracts.dll" target="lib\portable-net4+sl4+wp7+win8\WCF.Validation.Contracts.dll" />
+    </files>
+</package>
