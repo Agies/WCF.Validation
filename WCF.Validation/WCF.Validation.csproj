@@ -49,6 +49,7 @@
     <Compile Include="ModelState.cs" />
     <Compile Include="ParameterValidationInspector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValidatingServiceBase.cs" />
     <Compile Include="ValidationBehavior.cs" />
     <Compile Include="ValidationElement.cs" />
   </ItemGroup>

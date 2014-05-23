@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace WCF.Validation
+namespace WCF.Validation.Contracts
 {
     [DataContract]
     public class ResponseBase : IHaveValidationErrors

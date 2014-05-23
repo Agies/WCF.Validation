@@ -39,6 +39,9 @@
   <ItemGroup>
     <Compile Include="IHaveValidationErrors.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestBase.cs" />
+    <Compile Include="ResponseBase.cs" />
+    <Compile Include="ValidationError.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <PropertyGroup>

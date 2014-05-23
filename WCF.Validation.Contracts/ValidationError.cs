@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace WCF.Validation
+namespace WCF.Validation.Contracts
 {
     [DataContract]
     public class ValidationError

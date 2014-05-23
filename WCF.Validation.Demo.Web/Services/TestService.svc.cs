@@ -3,7 +3,7 @@ using WCF.Contracts.Service;
 
 namespace WCF.Validation.Demo.Web.Services
 {
-    public class TestService : ServiceBase, ITestService
+    public class TestService : ValidatingServiceBase, ITestService
     {
 
         public TestResponse TestMe(TestRequest request)
@@ -12,13 +12,10 @@ namespace WCF.Validation.Demo.Web.Services
             ModelState.AddModelError("", "I love validation");
             return response;
         }
-    }
 
-    public class ServiceBase
-    {
-        public ModelState ModelState
+        public string TestMe2(TestRequest request)
         {
-            get { return Validation.ModelState.Current; }
+            return "help";
         }
     }
 }

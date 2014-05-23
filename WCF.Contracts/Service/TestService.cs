@@ -8,5 +8,7 @@ namespace WCF.Contracts.Service
     {
         [OperationContract]
         TestResponse TestMe(TestRequest request);
+        [OperationContract]
+        string TestMe2(TestRequest request);
     }
 }

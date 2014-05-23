@@ -39,9 +39,6 @@
     <Compile Include="Data\TestRequest.cs" />
     <Compile Include="Data\TestResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Data\RequestBase.cs" />
-    <Compile Include="Data\ResponseBase.cs" />
-    <Compile Include="Data\ValidationError.cs" />
     <Compile Include="Service\TestService.cs" />
   </ItemGroup>
   <ItemGroup>
