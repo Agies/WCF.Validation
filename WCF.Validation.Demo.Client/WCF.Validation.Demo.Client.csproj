@@ -44,11 +44,11 @@
     <Reference Include="System.Xml" />
     <Reference Include="WCF.Validation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\WCF.Validation.1.0.3\lib\net45\WCF.Validation.dll</HintPath>
+      <HintPath>..\packages\WCF.Validation.1.0.4\lib\net45\WCF.Validation.dll</HintPath>
     </Reference>
     <Reference Include="WCF.Validation.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\WCF.Validation.1.0.3\lib\net45\WCF.Validation.Contracts.dll</HintPath>
+      <HintPath>..\packages\WCF.Validation.1.0.4\lib\net45\WCF.Validation.Contracts.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
