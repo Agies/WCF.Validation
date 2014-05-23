@@ -9,6 +9,13 @@ namespace WCF.Validation
 {
     public class ValidationBehavior : IEndpointBehavior, IServiceBehavior
     {
+        private readonly IRequestValidator _validator;
+
+        public ValidationBehavior(IRequestValidator validator)
+        {
+            _validator = validator;
+        }
+
         public void Validate(ServiceEndpoint endpoint)
         {
         }
@@ -21,7 +28,7 @@ namespace WCF.Validation
         {
             foreach (DispatchOperation dispatchOperation in endpointDispatcher.DispatchRuntime.Operations)
             {
-                dispatchOperation.ParameterInspectors.Add(new ParameterValidationInspector());
+                dispatchOperation.ParameterInspectors.Add(new ParameterValidationInspector(_validator));
             }
         }
 
@@ -29,7 +36,7 @@ namespace WCF.Validation
         {
             foreach (ClientOperation clientOperation in clientRuntime.Operations)
             {
-                clientOperation.ParameterInspectors.Add(new ParameterValidationInspector());
+                clientOperation.ParameterInspectors.Add(new ParameterValidationInspector(_validator));
             }
         }
 
@@ -51,7 +58,7 @@ namespace WCF.Validation
                 {
                     foreach (DispatchOperation dispatchOperation in endpointDispatcher.DispatchRuntime.Operations)
                     {
-                        dispatchOperation.ParameterInspectors.Add(new ParameterValidationInspector());
+                        dispatchOperation.ParameterInspectors.Add(new ParameterValidationInspector(_validator));
                     }
                 }
             }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Dispatcher;
@@ -9,15 +7,17 @@ namespace WCF.Validation
 {
     public class ParameterValidationInspector : IParameterInspector
     {
+        private readonly IRequestValidator _requestValidator;
+
+        public ParameterValidationInspector(IRequestValidator requestValidator)
+        {
+            _requestValidator = requestValidator;
+        }
+
         public object BeforeCall(string operationName, object[] inputs)
         {
             OperationContext.Current.Extensions.Add(new ModelState());
-
-            //Assuming that we are using Request/Response objects
-            foreach (var input in inputs)
-            {
-                Validator.TryValidateObject(input, new ValidationContext(input), ModelState.Current.Errors);
-            }
+            _requestValidator.Validate(inputs);
             return null;
         }
 
@@ -40,6 +40,40 @@ namespace WCF.Validation
                     result.AddValidationError("", validationResult.ErrorMessage);
                 }
                     
+            }
+        }
+    }
+
+    public interface IRequestValidator
+    {
+        void Validate(object[] inputs);
+    }
+
+    public class AnnotationRequestValidator : IRequestValidator
+    {
+        public void Validate(object[] inputs)
+        {
+            foreach (var input in inputs)
+            {
+                Validator.TryValidateObject(input, new ValidationContext(input), ModelState.Current.Errors);
+            }
+        }
+    }
+
+    public class AnnotationAndValidatableRequestValidator : IRequestValidator
+    {
+        public void Validate(object[] inputs)
+        {
+            foreach (var input in inputs)
+            {
+                var context = new ValidationContext(input);
+                Validator.TryValidateObject(input, context, ModelState.Current.Errors);
+                var validatable = input as IValidatableObject;
+                if (validatable == null) continue;
+                foreach (var error in validatable.Validate(context))
+                {
+                    ModelState.Current.Errors.Add(error);
+                }
             }
         }
     }

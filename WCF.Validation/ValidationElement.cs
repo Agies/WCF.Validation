@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Configuration;
+using System.Runtime.InteropServices;
 using System.ServiceModel.Configuration;
 
 namespace WCF.Validation
@@ -16,9 +18,28 @@ namespace WCF.Validation
     /// </summary>
     public class ValidationElement : BehaviorExtensionElement
     {
+        private const string requestValidator = "requestValidator";
+        
+        [ConfigurationProperty(requestValidator)]
+        public string RequestValidator
+        {
+            get { return (string)base[requestValidator]; }
+            set { base[requestValidator] = requestValidator; }
+        }
+
         protected override object CreateBehavior()
         {
-            return new ValidationBehavior();
+            IRequestValidator validator;
+            if (!string.IsNullOrWhiteSpace(RequestValidator))
+            {
+                validator = Activator.CreateInstance(Type.GetType(RequestValidator)) as IRequestValidator;
+            }
+            else
+            {
+                validator = new AnnotationAndValidatableRequestValidator();
+            }
+
+            return new ValidationBehavior(validator);
         }
 
         public override Type BehaviorType
