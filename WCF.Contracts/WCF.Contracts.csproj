@@ -35,6 +35,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <ProjectReference Include="..\WCF.Validation.Contracts\WCF.Validation.Contracts.csproj">
+      <Project>{4C667A2D-A6B4-4EE1-9989-B093D2ABBE34}</Project>
+      <Name>WCF.Validation.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\TestRequest.cs" />

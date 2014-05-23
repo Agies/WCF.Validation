@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Dispatcher;
@@ -21,14 +23,23 @@ namespace WCF.Validation
 
         public void AfterCall(string operationName, object[] outputs, object returnValue, object correlationState)
         {
-            var result = returnValue as ResponseBase;
-            if (result != null)
+            var result = returnValue as IHaveValidationErrors;
+            if (result == null) return;
+
+            foreach (var validationResult in ModelState.Current.Errors)
             {
-                result.Errors.AddRange(ModelState.Current.Errors.SelectMany(t => t.MemberNames.Select(m => new ValidationError
+                if (validationResult.MemberNames != null && validationResult.MemberNames.Any())
                 {
-                    MemberName = m,
-                    Message = t.ErrorMessage,
-                })));
+                    foreach (var memberName in validationResult.MemberNames)
+                    {
+                        result.AddValidationError(memberName, validationResult.ErrorMessage);
+                    }
+                }
+                else
+                {
+                    result.AddValidationError("", validationResult.ErrorMessage);
+                }
+                    
             }
         }
     }

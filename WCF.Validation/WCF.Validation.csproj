@@ -50,9 +50,9 @@
     <Compile Include="ValidationElement.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WCF.Contracts\WCF.Contracts.csproj">
-      <Project>{4F5661E0-3D93-4139-962A-0D522D8A36FB}</Project>
-      <Name>WCF.Contracts</Name>
+    <ProjectReference Include="..\WCF.Validation.Contracts\WCF.Validation.Contracts.csproj">
+      <Project>{4C667A2D-A6B4-4EE1-9989-B093D2ABBE34}</Project>
+      <Name>WCF.Validation.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

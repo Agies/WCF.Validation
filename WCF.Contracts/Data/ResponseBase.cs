@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace WCF.Validation
 {
     [DataContract]
-    public abstract class ResponseBase
+    public class ResponseBase : IHaveValidationErrors
     {
         protected ResponseBase(RequestBase requestBase) : this()
         {
@@ -22,5 +22,14 @@ namespace WCF.Validation
 
         [DataMember]
         public List<ValidationError> Errors { get; set; }
+
+        public void AddValidationError(string memberName, string errorMessage)
+        {
+            Errors.Add(new ValidationError
+                       {
+                           MemberName = memberName,
+                           Message = errorMessage,
+                       });
+        }
     }
 }
