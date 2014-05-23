@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using WCF.Contracts.Data;
 using WCF.Contracts.Service;
+using WCF.Validation.Contracts;
 
 namespace WCF.Validation.Demo.Client
 {
@@ -19,11 +17,27 @@ namespace WCF.Validation.Demo.Client
                 var request = new TestRequest();
                 Console.WriteLine("Make Request {0}", request.MessageId);
                 var result = wcfClient.ChannelFactory.CreateChannel().TestMe(request);
-                Console.WriteLine("Request {0} contains the following errors\n", result.RequestId);
+                Console.WriteLine("Request {0} contains the following errors", result.RequestId);
                 foreach (var validationError in result.Errors)
                 {
                     Console.WriteLine("\t Member '{0}' is mad because {1}", validationError.MemberName, validationError.Message);
                 }
+
+                var channel = wcfClient.ChannelFactory.CreateChannel();
+                using (var scope = new OperationContextScope((IClientChannel)channel))
+                {
+                    var result2 = channel.TestMe2(request);
+                    Console.WriteLine();
+                    Console.WriteLine("Request '{0}' contains the following errors in the Header", result2);
+                    var index = OperationContext.Current.IncomingMessageHeaders.FindHeader(ParameterValidationInspector.ErrorHeader, "http://WCF.Validation");
+                    var header = OperationContext.Current.IncomingMessageHeaders.GetHeader<List<ValidationError>>(index);
+                    foreach (var validationError in header)
+                    {
+                        Console.WriteLine("\t Member '{0}' is mad because {1}", validationError.MemberName,
+                            validationError.Message);
+                    }
+                }
+
             }
             catch (Exception e)
             {

@@ -3,16 +3,20 @@ using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
-using System.Xml.Serialization;
 using WCF.Validation.Contracts;
 
 namespace WCF.Validation
 {
+    public class ErrorHeaderMeta
+    {
+        public const string ErrorHeader = "Errors";
+        public const string ErrorHeaderNameSpace = "http://WCF.Validation";
+    }
+
     public class ParameterValidationInspector : IParameterInspector
     {
         private readonly IRequestValidator _requestValidator;
-        public const string ErrorHeader = "Errors";
-
+        
         public ParameterValidationInspector(IRequestValidator requestValidator)
         {
             _requestValidator = requestValidator;
@@ -45,7 +49,7 @@ namespace WCF.Validation
                     }
 
                 }
-                var messageHeader = MessageHeader.CreateHeader(ErrorHeader, "http://WCF.Validation", errors);
+                var messageHeader = MessageHeader.CreateHeader(ErrorHeaderMeta.ErrorHeader, ErrorHeaderMeta.ErrorHeaderNameSpace, errors);
                 OperationContext.Current.OutgoingMessageHeaders.Add(messageHeader);
             }
             else

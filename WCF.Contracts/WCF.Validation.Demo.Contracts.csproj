@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="WCF.Validation.Contracts">
-      <HintPath>..\packages\WCF.Validation.1.0.4\lib\portable-net4+sl4+wp7+win8\WCF.Validation.Contracts.dll</HintPath>
+      <HintPath>..\packages\WCF.Validation.1.1.0\lib\portable-net4+sl4+wp7+win8\WCF.Validation.Contracts.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
