@@ -3,6 +3,8 @@ WCF.Validation
 
 Handle WCF validation similar to MVC with ModelState
 
+http://www.nuget.org/packages/WCF.Validation/
+
 - Run WCF Validation Demo Web FIRST
 - Run WCF Validation Demo Client Second
 
