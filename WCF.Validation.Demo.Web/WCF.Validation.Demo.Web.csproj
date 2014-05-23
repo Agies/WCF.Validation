@@ -215,9 +215,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WCF.Contracts\WCF.Contracts.csproj">
+    <ProjectReference Include="..\WCF.Contracts\WCF.Validation.Demo.Contracts.csproj">
       <Project>{4F5661E0-3D93-4139-962A-0D522D8A36FB}</Project>
-      <Name>WCF.Contracts</Name>
+      <Name>WCF.Validation.Demo.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\WCF.Validation.Contracts\WCF.Validation.Contracts.csproj">
       <Project>{4C667A2D-A6B4-4EE1-9989-B093D2ABBE34}</Project>
