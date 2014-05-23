@@ -79,6 +79,14 @@
     <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
+    <Reference Include="WCF.Validation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WCF.Validation.1.0.1\lib\net45\WCF.Validation.dll</HintPath>
+    </Reference>
+    <Reference Include="WCF.Validation.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WCF.Validation.1.0.1\lib\net45\WCF.Validation.Contracts.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -218,14 +226,6 @@
     <ProjectReference Include="..\WCF.Contracts\WCF.Validation.Demo.Contracts.csproj">
       <Project>{4F5661E0-3D93-4139-962A-0D522D8A36FB}</Project>
       <Name>WCF.Validation.Demo.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WCF.Validation.Contracts\WCF.Validation.Contracts.csproj">
-      <Project>{4C667A2D-A6B4-4EE1-9989-B093D2ABBE34}</Project>
-      <Name>WCF.Validation.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WCF.Validation\WCF.Validation.csproj">
-      <Project>{6088749d-9106-4694-8686-c1d951cb8bfe}</Project>
-      <Name>WCF.Validation</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
