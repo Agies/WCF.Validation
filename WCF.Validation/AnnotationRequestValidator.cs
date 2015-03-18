@@ -15,7 +15,7 @@ namespace WCF.Validation
 
         protected virtual void OnValidate(object input, ValidationContext context)
         {
-            Validator.TryValidateObject(input, context, ModelState.Current.Errors);
+            Validator.TryValidateObject(input, context, ModelState.Current.Errors, true);
         }
     }
 }

@@ -29,7 +29,15 @@ namespace WCF.Validation
 
         public void AddModelError(string member, string message)
         {
-            Errors.Add(new ValidationResult(message, new[] {member}));
+            AddError(new ValidationResult(message, new[] { member }));
+        }
+
+        public void AddError(ValidationResult error)
+        {
+            if (Errors.Any(er => er.MemberNames.SequenceEqual(error.MemberNames) &&
+                                 er.ErrorMessage == error.ErrorMessage))
+                return;
+            Errors.Add(error);
         }
 
         public ICollection<ValidationResult> Errors { get; set; }

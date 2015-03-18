@@ -11,7 +11,7 @@ namespace WCF.Validation
             if (validatable == null) return;
             foreach (var error in validatable.Validate(context))
             {
-                ModelState.Current.Errors.Add(error);
+                ModelState.Current.AddError(error);
             }
         }
     }
