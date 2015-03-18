@@ -29,7 +29,7 @@ namespace WCF.Validation.Demo.Client
                     var result2 = channel.TestMe2(request);
                     Console.WriteLine();
                     Console.WriteLine("Request '{0}' contains the following errors in the Header", result2);
-                    var index = OperationContext.Current.IncomingMessageHeaders.FindHeader(ParameterValidationInspector.ErrorHeader, "http://WCF.Validation");
+                    var index = OperationContext.Current.IncomingMessageHeaders.FindHeader(ErrorHeaderMeta.ErrorHeader, "http://WCF.Validation");
                     var header = OperationContext.Current.IncomingMessageHeaders.GetHeader<List<ValidationError>>(index);
                     foreach (var validationError in header)
                     {

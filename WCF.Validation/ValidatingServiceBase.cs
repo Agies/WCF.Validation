@@ -2,9 +2,16 @@
 {
     public class ValidatingServiceBase
     {
-        public ModelState ModelState
+        private readonly IModelStateProvider _modelStateProvider;
+
+        public ValidatingServiceBase(IModelStateProvider modelStateProvider)
         {
-            get { return ModelState.Current; }
+            _modelStateProvider = modelStateProvider;
+        }
+
+        public IModelState ModelState
+        {
+            get { return _modelStateProvider.Instance; }
         }
     }
 }

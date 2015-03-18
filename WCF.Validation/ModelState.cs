@@ -6,8 +6,22 @@ using System.ServiceModel;
 
 namespace WCF.Validation
 {
-    public class ModelState : IExtension<OperationContext>
+    public interface IModelState
     {
+        bool IsValid { get; }
+        ICollection<ValidationResult> Errors { get; set; }
+        void AddModelError(string member, string message);
+        void Attach(OperationContext owner);
+        void Detach(OperationContext owner);
+    }
+
+    public class ModelState : IExtension<OperationContext>, IModelState
+    {
+        public ModelState()
+        {
+            Errors = new Collection<ValidationResult>();
+        }
+
         public bool IsValid
         {
             get { return !Errors.Any(); }
@@ -18,7 +32,7 @@ namespace WCF.Validation
             Errors.Add(new ValidationResult(message, new[] {member}));
         }
 
-        public ICollection<ValidationResult> Errors { get; private set; }
+        public ICollection<ValidationResult> Errors { get; set; }
 
         public static ModelState Current 
         {
